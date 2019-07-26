@@ -1,0 +1,7 @@
+The following describes the procedure needed to be used to sculpt data so that it can be used to create a classifier 
+using a Random Forests Model
+
+The bed file I was given was created by Matt Neville in Dr. Sudhakaran Prabakaran's lab and is entitled noinFrame_38.bed. 
+It contains about 194,000 nORFs that we will use to map variants to from ClinVar, the HGMD database, and an Ensembl EPO 6-way 
+Primate alignment
+
