@@ -11,6 +11,37 @@ To create three blank columns use the following code:
 human_derived_SNV_data['..'] = '.'
 human_derived_SNV_data['...'] = '.'
 human_derived_SNV_data['....'] = '.'
-The above creates columns with dummy data in them. It is necessary to have in order to run bedtools. 
-2. 
+The above creates columns with dummy data in them. It is necessary to have in order to run bedtools intersect and ANNOVAR annotations in the future. 
+
+2. Keep the data that is currently stored in the column names of the dataframe
+Before changing column name headers to CHROM, POS, etc., you must keep the information from the current header and create a new row for it using the code:
+An example is shown below:
+human_derived_SNV_data.loc[-1] = ['1', '379177', '.', 'G', 'T', '.', '.', '.']
+human_derived_SNV_data.index = human_derived_SNV_data.index + 1  # shifting index
+human_derived_SNV_data = human_derived_SNV_data.sort_index()
+
+To change header use code:
+dataframe.columns = ['CHROM', 'POS', 'ID', 'REF', 'ALT', 'QUAL', 'FORMAT', 'INFO']
+It is not possible to use bedtools intersect for a vcf with any header, even a blank line. 
+Therefore, this header needs to be cut out before running the command line tools, which will be discussed in the command line documnet for the human derived data.
+
+
+
+3. Export the new dataframe as a vcf
+The following code changes the dataframe into a vcf file containing a header:
+header = """##fileformat=VCFv4.1
+##fileDate=20090805
+##source=myImputationProgramV3.1
+##reference=file:///seq/references/
+#CHROM POS ID REF ALT QUAL FILTER INFO"""
+output_VCF = "humanderivedSNVs.vcf"
+with open(output_VCF, 'w') as vcf:
+    vcf.write(header)
+human_derived_SNV_data.to_csv(output_VCF, sep="\t", mode='a', index=False)
+
+You will notice a new file in your Jupyter Notebook home entitled 'humanderivedSNVs.vcf'
+
+4. Click on the checkbox next to this file and click download at the top of the page
+
+
 
