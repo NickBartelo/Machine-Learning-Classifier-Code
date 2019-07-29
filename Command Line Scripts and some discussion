@@ -26,8 +26,6 @@ dataframe.columns = ['CHROM', 'POS', 'ID', 'REF', 'ALT', 'QUAL', 'FORMAT', 'INFO
 It is not possible to use bedtools intersect for a vcf with any header, even a blank line. 
 Therefore, this header needs to be cut out before running the command line tools, which will be discussed in step 5.
 
-
-
 3. Export the new dataframe as a vcf
 The following code changes the dataframe into a vcf file containing a header:
 header = """##fileformat=VCFv4.1
