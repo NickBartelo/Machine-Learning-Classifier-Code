@@ -1,0 +1,6 @@
+Human Derived
+
+In order to run bedtools intersect on this dataframe, we must use the following code:
+
+bedtools intersect -a  ../../../data/input/humanDrive/humanDerived_SNVs_hg38_with_NA.vcf -b  ../../../data/input/sOrfs/nORF_withOut_chr.bed   -wa | sort | uniq -c | awk '{print  $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > human_drive_mapped_to_sorfs.vcf
+where the file after -a is the hg38 vcf file created using the commands from the github file 'Human Derived EPO 6-way 
