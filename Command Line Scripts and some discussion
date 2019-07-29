@@ -1,4 +1,5 @@
 In order to use liftOver from the UCSC Genome Browser, it is necessary to change the data in the following ways:
+
 1. Create 3 blank columns in the dataframe
 To do this, import the vcf into a Jupyter Notebook Python Dataframe using the following function:
 def read_vcf(path):
@@ -23,7 +24,7 @@ human_derived_SNV_data = human_derived_SNV_data.sort_index()
 To change header use code:
 dataframe.columns = ['CHROM', 'POS', 'ID', 'REF', 'ALT', 'QUAL', 'FORMAT', 'INFO']
 It is not possible to use bedtools intersect for a vcf with any header, even a blank line. 
-Therefore, this header needs to be cut out before running the command line tools, which will be discussed in the command line documnet for the human derived data.
+Therefore, this header needs to be cut out before running the command line tools, which will be discussed in step 5.
 
 
 
@@ -42,6 +43,39 @@ human_derived_SNV_data.to_csv(output_VCF, sep="\t", mode='a', index=False)
 You will notice a new file in your Jupyter Notebook home entitled 'humanderivedSNVs.vcf'
 
 4. Click on the checkbox next to this file and click download at the top of the page
+If using a virtual machine like myself, copy the file to a location where you can call it in command line.
+e.g. copy from downloads folder to WinSCP
 
+5. Cut out everything that is not data
+Use the following code to cut the header line by line so that bedtools intersect can be run:
+sed -i '1d' ./humanderivedSNVsreal.vcf 
+This cuts out the first line of the vcf file, which contains unneccessary information. Do this until data is at the top of the file.
 
+6. Change the chromosome values 
+The chromosome values are not in the same format as the noInFrame_38.bed file so you must use the following code in order for bedtools intersect and the change to hg38 to work:
+awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' humanderivedSNVsreal.vcf > humanderivedSNVs_aligned_for_noInFrame_38.vcf
+
+7. Change the vcf file into a bed6 file
+Human Derived data is using hg19 so it is necessary to change it to GRCh38 in order to use it with the nORF database and the annotation tools such as CADD.
+To do this, we need to change the vcf file into a bed6 file using the following code:
+awk 'NR > 5' file_for_narendra.vcf | awk '{print $1 "\t" $2-1 "\t" $2 "\t" $4 "\\" $5 "\t" 0"\t." }' > file_for_narendra.bed6
+
+This code takes a vcf and prints out its chromosome number, start position, end position, name (alleles), score, and strand.
+The ‘NR > 5’ just tells the code to skip the first 5 lines which is how long the header of the file is (everything with ## and #).
+The start position and end position are always one apart, with the end position being a number one greater than the start position, since we are using SNVs.
+The last 2 columns have values of 0 and . respectively as well.
+
+8. Run liftover 
+To do this, we downloaded the liftOver binary file from https://genome.sph.umich.edu/wiki/LiftOver, the hg19toHg38.over.chain.gz file from http://hgdownload.cse.ucsc.edu/goldenPath/hg19/liftOver/ and unzipped it, and the bed file we made above to the ubuntu WinSCP file space.
+The code used to run liftover is below:
+./liftOver humanderivedSNVsreal_convertedtobed_with_chr.bed6 hg19ToHg38.over.chain humanderivedSNVsreal_lifted.bed humanderived_SNVsreal_unlifted.bed
+The format for the above code is: liftover command, file wanted to be converted, chain file, desired output file name, and desired name for file of all the variants that didn’t get crossed over.
+
+9. Convert the bed file back into a vcf
+We first must split the single allele column of the bed file into two separate columns, one for the REF and one for the ALT of the vcf. We do this using the code below:
+awk '{sub(/\\/," ",$4)};4' <humanderivedSNVsreal_lifted.bed > humanderivedSNVsreal_lifted_with_alleles_separated.bed
+
+Next, we take the necessary columns for the vcf with the code below:
+awk 'NF > 0' humanderivedSNVsreal_lifted_with_alleles_separated.bed | awk '{print $1 "\t" $3 "\t" "." "\t"  $4 "\t" $5}' > humanderivedSNVsreal_lifted_converted_to_vcf.vcf
+The above gives us the chromosome, position, a blank column for the ID, the REF allele, and the ALT allele. Everything we started with but now in hg38.
 
