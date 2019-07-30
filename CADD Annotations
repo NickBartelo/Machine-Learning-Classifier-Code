@@ -1,0 +1,45 @@
+CADD annotations were performed uisng the online annotation source whose link is below:
+https://cadd.gs.washington.edu/score
+
+Specifications for CADD file input:
+1. File must be in VCF format
+2. File must be under 2 MB 
+3. File must have less than 100,000 variants
+
+To meet these specifications, split the human derived benign variants dataframe into 11 separate frames, the first 10 containing 90,000 variants each, and the last containing the remaining.
+All other dataframes used are already under 100,000 variants. 
+To meet the file size specification, I also cut the columns 'QUAL', 'FILTER', and 'INFO' from the dataframe in Jupyter Notebook using the following code:
+clinvar_benign_coding_for_cadd = clinvar_benign_coding.drop(columns = ['QUAL', 'FILTER', 'INFO'])
+
+Then it is necessary to export the file using the header format and as a VCF using the following code:
+
+header = """##fileformat=VCFv4.1
+##fileDate=20090805
+##source=myImputationProgramV3.1
+##reference=file:///seq/references/
+#CHROM POS ID REF ALT QUAL FILTER INFO
+"""
+output_VCF = "clinvar_benign_coding_for_cadd.vcf"
+with open(output_VCF, 'w') as vcf:
+    vcf.write(header)
+clinvar_benign_coding_for_cadd.to_csv(output_VCF, sep="\t", mode='a', index=False)
+
+To run CADD annotations:
+1. Download the VCF file created above from Jupyter Notebook
+2. Go to the website
+3. Click choose file and select the clinvar_benign_coding_for_cadd.vcf
+4. Change the box to the right to GRCh38-v1.5
+5. Click INCLUDE ANNOTATIONS
+6. Click UPLOAD VARIANTS
+
+The files should not take longer than 5 hours to complete. You can run multiple files at a time. For example, I ran all 11 noncoding benign variant VCF files at once.
+To get the completely annotated files, there will be a word you need to click within the writing and the download will start right for the annotated file.
+The same process will work with all files. For the Human Derived SNVs, it is not necessary to cut any of the columns since it already has 5.
+
+After the annotations are complete, unzip the tsv.gz file (for Windows, right click on the file and click 7-zip then click Extract here).
+Open the unzipped file in a text editor and cut out the top lines until the data. Save this file as a .tsv file. Upload this file into Jupyter Notebook.
+
+To import the file for manipulation in Jupyter Notebook, use the following code to create a dataframe for the code:
+clivnar_benign_coding_annotated_with_cadd = pd.read_table('clinvar_coding_benign_cadd_annotations_noheader.tsv')
+clivnar_benign_coding_annotated_with_cadd
+This gives a dataframe with the annotated variants.
