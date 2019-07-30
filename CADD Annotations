@@ -43,3 +43,15 @@ To import the file for manipulation in Jupyter Notebook, use the following code 
 clivnar_benign_coding_annotated_with_cadd = pd.read_table('clinvar_coding_benign_cadd_annotations_noheader.tsv')
 clivnar_benign_coding_annotated_with_cadd
 This gives a dataframe with the annotated variants.
+
+For annotations of large files not on the CADD website, use the following code:
+
+For Human Derived SNVs VCFs:
+../../../tools/CADD-scripts/CADD.sh -a -g GRCh38 -o human_drive_cadd_output_inclAnno_GRCh38.tsv.gz ../../variantMapToSorfs/humanDrivedSnvCadd/human_drive_mapped_to_norfs.vcf
+
+For HGMD VCFs: 
+../../../tools/CADD-scripts/CADD.sh -a -g GRCh38 -o hgmd_cadd_output_inclAnno_GRCh38.tsv.gz ../../variantMapToSorfs/hgmd/hgmd_mapped_to_norfs.vcf
+
+For ClinVar VCFs:
+../../../tools/CADD-scripts/CADD.sh -a -g GRCh38 -o clinvar_cadd_output_inclAnno_GRCh38.tsv.gz ../../variantMapToSorfs/clinvar/clinvar_mapped_to_norfs.vcf
+
