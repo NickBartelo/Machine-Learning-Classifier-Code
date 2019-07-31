@@ -15,7 +15,8 @@ To follow the correct order of the pipeline, read the files in the following seq
 2. Bedtools Intersect with ClinVar, HGMD, and Human Derived
 3. CADD Annotations
 4. ANNOVAR Annotations
-5.
+5. Merging Annotations
+6. 
 
 ## Mapping Variants to nORFs
 
