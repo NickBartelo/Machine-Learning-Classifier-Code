@@ -1,1 +1,73 @@
 MAKE SURE TO HAVE OVER 100 GB FOR ANNOVAR ANNOTATIONS DISPOSABLE
+
+Files need to have chromosome name (CHROM) column values be in form chr# for ANNOVAR to work.
+
+Again, open the vcf files for annotation in a text editor and delete all header information until reaching the data.
+Upload these files to your workspace - for me it was WinSCP.
+
+Download of ANNOVAR on Ubuntu Command Line:
+
+1. Go to http://annovar.openbioinformatics.org/en/latest/user-guide/download/
+
+2. At the top of this page, you will see the following sentence - The latest version of ANNOVAR (2018Apr16) can be downloaded here (registration required).
+Click on the word 'here' and it will redirect you to a registration page.
+
+3. Fill out the form and click I agree.
+
+4. An email will be sent to you by Kai Wang with a link for the ANNOVAR documentation.
+
+5. Unzip the File given from the link.
+
+6. Save the ANNOVAR folder to your workspace.
+
+7. Open command line 
+
+8. In command line type 'cd annovar'
+
+9. Run the following code:
+chmod a+x annotate_variation.pl
+chmod a+x coding_change.pl
+These allow for the annotation tables to be created
+
+10. Follow the list of commands on the following page under table_annovar.pl http://annovar.openbioinformatics.org/en/latest/user-guide/startup/
+YOU NEED TO PUT 'perl' IN FRONT OF ALL THE COMMANDS RUN ABOVE
+
+11. Once done executing these, execute the following codes as well which will be needed to annotate since they contain files for annotation:
+
+perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar knownGene humandb/
+
+perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar ensGene humandb/
+
+perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar ljb26_all humandb/
+
+perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar dbnsfp31a_interpro humandb/
+
+perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar dbnsfp33a humandb/
+
+perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar dbscsnv11 humandb/
+
+perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar intervar_20180118 humandb/
+
+perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar cosmic70 humandb/
+
+perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar mcap humandb/
+
+perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar revel humandb/
+
+perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar regsnpintron humandb/
+
+12. Run the following codes in order to annotate the files:
+HGMD
+perl ../../../tools/annovar/convert2annovar.pl -format vcf4 hgmd_mapped_to_sorfs.vcf >hgmd_mapped_to_sorfs.avinput 
+perl ../../../tools/annovar/table_annovar.pl ../../variantMapToSorfs/hgmd/hgmd_mapped_to_sorfs.avinput  ../../../tools/annovar/humandb/ -buildver hg38 -out hgmd  -remove -protocol  refGene,knownGene,ensGene,ljb26_all,dbnsfp31a_interpro,dbnsfp33a,dbscsnv11,intervar_20180118,cosmic70,mcap,revel,regsnpintron  -operation g,g,g,f,f,f,f,f,f,f,f,f -nastring . -csvout -polish --thread 30
+
+ClinVar
+perl ../../../tools/annovar/convert2annovar.pl -format vcf4 clinvar_mapped_to_sorfs.vcf  >clinvar_mapped_to_sorfs.avinput  
+perl ../../../tools/annovar/table_annovar.pl ../../variantMapToSorfs/clinvar/clinvar_mapped_to_sorfs.avinput  ../../../tools/annovar/humandb/ -buildver hg38 -out clinvar  -remove -protocol  refGene,knownGene,ensGene,ljb26_all,dbnsfp31a_interpro,dbnsfp33a,dbscsnv11,intervar_20180118,cosmic70,mcap,revel,regsnpintron  -operation g,g,g,f,f,f,f,f,f,f,f,f -nastring . -csvout -polish --thread 30
+
+Human Derived
+perl ../../../tools/annovar/convert2annovar.pl -format vcf4 human_drive_mapped_to_sorfs_annovar_input.vcf > human_drive_mapped_to_sorfs.avinput 
+perl ../../../tools/annovar/table_annovar.pl ../../variantMapToSorfs/humanDrivedSnvCadd/human_drive_mapped_to_sorfs.avinput ../../../tools/annovar/humandb/ -buildver hg38 -out humanDrive  -remove -protocol  refGene,knownGene,ensGene,ljb26_all,dbnsfp31a_interpro,dbnsfp33a,dbscsnv11,intervar_20180118,cosmic70,mcap,revel,regsnpintron  -operation g,g,g,f,f,f,f,f,f,f,f,f -nastring . -csvout -polish --thread 30
+
+Notice the above commands are all the same, just using different file inputs and outputs. 
+A list of what annotations you recieve are found on the first link at the top of this page.
