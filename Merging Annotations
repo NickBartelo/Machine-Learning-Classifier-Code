@@ -1,0 +1,10 @@
+First, we must import upload the annotated files into Jupyter Notebook and use the following code to read them based on their file type:
+
+For ANNOVAR (one example):
+clinvar_pathogenic_coding_annotated_with_annovar = pd.read_csv('clinvar_pathogenic_coding_from_cadd.csv')
+In order to import the noncoding human derived annovar script back into Jupyter Notebook, we must use the following code so that it is read in by chunks of data:
+
+
+For CADD:
+
+
