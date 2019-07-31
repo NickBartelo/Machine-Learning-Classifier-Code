@@ -10,7 +10,7 @@ Primate alignment, which I will refer to as the Human Derived SNVs.
 
 ## Layout of Material
 
-In order to follow the correct order of the pipeline, read the files in the following sequence:
+To follow the correct order of the pipeline, read the files in the following sequence:
 1. Human Derived EPO 6-Way VCF file using liftover for hg19 to hg38
 2. Bedtools Intersect with ClinVar, HGMD, and Human Derived
 3. CADD Annotations
