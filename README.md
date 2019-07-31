@@ -25,5 +25,11 @@ This file is the humanDerivedSNVs.vcf file. It has 5 columns. In order to be use
 
 
 
-# Reference
+# References
+
 Wang K, Li M, Hakonarson H. ANNOVAR: Functional annotation of genetic variants from next-generation sequencing data Nucleic Acids Research, 38:e164, 2010
+
+Rentzsch P, Witten D, Cooper GM, Shendure J, Kircher M. 
+CADD: predicting the deleteriousness of variants throughout the human genome.
+Nucleic Acids Res. 2018 Oct 29. doi: 10.1093/nar/gky1016.
+PubMed PMID: 30371827.
