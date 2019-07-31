@@ -1,10 +1,55 @@
 First, we must import upload the annotated files into Jupyter Notebook and use the following code to read them based on their file type:
 
 For ANNOVAR (one example):
+
 clinvar_pathogenic_coding_annotated_with_annovar = pd.read_csv('clinvar_pathogenic_coding_from_cadd.csv')
-In order to import the noncoding human derived annovar script back into Jupyter Notebook, we must use the following code so that it is read in by chunks of data:
+In order to import the noncoding human derived annovar script back into Jupyter Notebook using 8 GB RAM, we must use the following code so that it is read in by chunks of data:
+my_list = []
+for chunk in pd.read_csv('human_derived_noncoding_annotated.hg38_multianno.csv', chunksize = 5000, low_memory = False):
+    my_list.append(chunk)
+human_derived_noncoding_annotated_with_annovar = pd.concat(my_list, axis = 0)
+del my_list
+human_derived_noncoding_annotated_with_annovar
+
+For CADD: Since I had 11 files being annotated, I will show an example of the code I used to combine these into one dataframe
+
+# write df1 content in file.csv
+human_derived_noncoding_annotated_with_cadd_1.to_csv('annnotationforhumanderivedcadd.csv', index=False)
+# append df2 content to file.csv
+human_derived_noncoding_annotated_with_cadd_2.to_csv('annnotationforhumanderivedcadd.csv', mode = 'a', index=False)
+del human_derived_noncoding_annotated_with_cadd_1, human_derived_noncoding_annotated_with_cadd_2
+
+my_list = []
+for chunk in pd.read_csv('annnotationforhumanderivedcadd.csv', chunksize = 100, low_memory = False):
+    my_list.append(chunk)
+human_derived_noncoding_annotated_with_cadd = pd.concat(my_list, axis = 0)
+del my_list
+human_derived_noncoding_annotated_with_cadd
 
 
-For CADD:
+Once done importing the annotations, it is necessary to change the ANNOVAR dataframes a bit to match the CADD dataframes in the following ways:
+1. Change the chromosome outputs to chr# from # (e.g. from 1 to chr1): 
+human_derived_coding_annotated_with_annovar['Chr'] = human_derived_coding_annotated_with_annovar['Chr'].map(lambda x: x.lstrip('chr').rstrip('aAbBcC'))
+2. Rename the Chr and Start Columns to Match with CADD
+clinvar_benign_coding_annotated_with_annovar = clinvar_benign_coding_annotated_with_annovar.rename(columns = {'Chr': '#Chrom', 'Start': 'Pos'})
 
+Now it is possible to merge the dataframes using the columns #Chrom, Pos, Ref, Alt using the code below:
 
+clinvar_benign_coding_merged = pd.merge(clinvar_benign_coding_annotated_with_cadd, clinvar_benign_coding_annotated_with_annovar, how = 'left', on = ['#Chrom', 'Pos', 'Ref', 'Alt'])
+
+We merged the annotations based on the CADD dataframe because it had more output of variants due to the nature of the Ensembl VEP it uses discussed prior.
+
+Now it is necessary to drop any duplicate rows using the following command:
+clinvar_benign_noncoding_merged = clinvar_benign_noncoding_merged.drop_duplicates(keep = 'first')
+
+These rows contain all the same information and therefore it is only necessary to keep one.
+This will allow our model to train better and not overfit to the training data as much.
+
+However, you will notice that there are other rows of data that are kept which contain similar data, but not exactly the same values for each column.
+We keep this data to run our first model. We may perform actions on these rows in the future if we think we can increase the accuracy of the model by doing so.
+
+Now that we have all the annotations combined for each specific database, we can concatenate the files with the other corresponding file
+For example there are 2 annotation dataframes for pathogenic coding region variants - HGMD and ClinVar 
+Therefore, we can run the following code to get our final annotated dataframes:
+
+pd.concat([hgmd_coding_merged, clinvar_pathogenic_coding_merged])
