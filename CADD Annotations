@@ -55,3 +55,6 @@ For HGMD VCFs:
 For ClinVar VCFs:
 ../../../tools/CADD-scripts/CADD.sh -a -g GRCh38 -o clinvar_cadd_output_inclAnno_GRCh38.tsv.gz ../../variantMapToSorfs/clinvar/clinvar_mapped_to_norfs.vcf
 
+The outputs for CADD annotations may contain multiple outputs for a single variant. 
+The reason for this is because CADD uses an Ensemble VEP for annotation and this creates multiple outputs based on predictions of the function of the variant.
+We will discuss this further as how it impacts our model.
