@@ -1,8 +1,16 @@
 First, we must import upload the annotated files into Jupyter Notebook and use the following code to read them based on their file type:
 
+We use dask in python to import large files, seen below. Dask is made for processing large data into dataframes. Not every dataframe we have needs dask.
+To install dask, use the following commands in the Python terminal:
+
+pip install dask==1.0.0
+pip install toolz
+pip install dask[dataframe]
+
 For ANNOVAR (one example):
 
 clinvar_pathogenic_coding_annotated_with_annovar = pd.read_csv('clinvar_pathogenic_coding_from_cadd.csv')
+
 In order to import the noncoding human derived annovar script back into Jupyter Notebook using 8 GB RAM, we must use the following code so that it is read in by chunks of data:
 my_list = []
 for chunk in pd.read_csv('human_derived_noncoding_annotated.hg38_multianno.csv', chunksize = 5000, low_memory = False):
