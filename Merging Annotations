@@ -36,7 +36,7 @@ human_derived_noncoding_annotated_with_cadd
 
 
 Once done importing the annotations, it is necessary to change the ANNOVAR dataframes a bit to match the CADD dataframes in the following ways:
-1. Change the chromosome outputs to chr# from # (e.g. from 1 to chr1): 
+1. Change the chromosome outputs to # from chr# (e.g. from chr1 to 1): 
 human_derived_coding_annotated_with_annovar['Chr'] = human_derived_coding_annotated_with_annovar['Chr'].map(lambda x: x.lstrip('chr').rstrip('aAbBcC'))
 2. Rename the Chr and Start Columns to Match with CADD
 clinvar_benign_coding_annotated_with_annovar = clinvar_benign_coding_annotated_with_annovar.rename(columns = {'Chr': '#Chrom', 'Start': 'Pos'})
