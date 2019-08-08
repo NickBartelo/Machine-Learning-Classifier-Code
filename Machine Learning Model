@@ -6,3 +6,11 @@ Up to this point, I have created four essential files for the two machine learni
 
 These files contain the annotated variants mapped to the nORFs database of the lab for a specific region (coding and noncoding) 
 and with specific features (benign or pathogenic).
+
+Using Python, I used a new Jupyter Notebook given to me by Narendra Meena, a member of the Prabakaran lab. 
+To use the features of this document, one must first open the Python terminal and run the following commands:
+1. pip install pandas
+2. pip install sklearn
+3. pip install matplotlib
+4. pip install shap
+
