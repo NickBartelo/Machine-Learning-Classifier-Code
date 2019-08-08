@@ -1,0 +1,8 @@
+Up to this point, I have created four essential files for the two machine learning models to be developed:
+1. benign_coding_region_variants.csv
+2. pathogenic_coding_region_variants.csv
+3. benign_noncoding_region_variants.csv
+4. pathogenic_noncoding_region_variants.csv
+
+These files contain the annotated variants mapped to the nORFs database of the lab for a specific region (coding and noncoding) 
+and with specific features (benign or pathogenic).
