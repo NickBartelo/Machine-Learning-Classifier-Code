@@ -39,6 +39,7 @@ There are a few specifications by the CADD website that need to be taken into co
 * Input files must be in VCF format
 * Input files must be under 2 MB
 * Input files must have less than 100,000 variants
+
 It is necessary to cut out columns of the dataframes which are not needed for CADD Annotations. This saves a lot of space and allows for more variants to be processed per upload.
 While reading the CADD Annotation files, there will be a clear guide on how to get passed these challenges.
 
