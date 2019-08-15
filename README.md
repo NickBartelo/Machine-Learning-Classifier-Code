@@ -5,7 +5,7 @@ The following describes the procedure used to sculpt data so that an accurate cl
 using a Random Forests Model can be created.
 
 The bed file I was given was created by Matt Neville in Dr. Sudhakaran Prabakaran's lab and is entitled noinFrame_38.bed. 
-It contains about 194,000 nORFs that we will use to map variants to from ClinVar, the HGMD database, and an Ensembl Enredo, Pecan, Ortheus Pipeline (EPO) 6-way Primate alignment, which I will refer to as the Human Derived SNVs.
+It contains about 194,000 nORFs that we will use to map variants to from ClinVar, the HGMD database, and an Ensembl Enredo, Pecan, Ortheus Pipeline (EPO) 6-way Primate alignment, which I will refer to as the Human Derived SNVs and human derived. 
 
 ## Layout of Material
 
