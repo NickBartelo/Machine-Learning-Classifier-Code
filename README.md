@@ -58,6 +58,7 @@ I manipulated the dataframes prepared for CADD annotations (with only 5 columns)
 The Jupyter Notebook file contains all the information necessary for this part of the data manipulation and I would recommend only looking at this file. Merging annotations raises many issues with performance since the files are very large. It is necessary to begin using dask dataframe and considering other things, such as data types (dtypes). The Jupyter Notebook file shows the necessary pipeline to receive final dataframes for the pathogenic coding region, pathogenic noncoding region, benign coding region, and benign noncoding region which will be used for the classifier. 
 
 * At this point, we have dataframes for variants mapped to nORFs which contain annotations from CADD and ANNOVAR. 
+
 The next step is to understand how the annotations influence the model by using PCA correlation testing. By doing this, it is possible to cut out unnecessary columns from out dataframe, allowing the classifier to learn using significant data only.
 
 # References
