@@ -15,7 +15,7 @@ To follow the correct order of the pipeline, read the files in the following seq
 3. CADD Annotations with CADD Annotations.ipynb
 4. ANNOVAR Annotations with ANNOVAR Annotation.ipynb
 5. Merging Annotations with Merging Annotations.ipynb
-6. 
+6. PCA for Variants.ipynb
 
 Both the coding file and the Jupyter Notebook file must be looked at in order to achieve the correct results. It is suggested to have both files open side by side to look at which steps correspond with each line in the writing files. 
 
@@ -60,6 +60,10 @@ The Jupyter Notebook file contains all the information necessary for this part o
 * At this point, we have dataframes for variants mapped to nORFs which contain annotations from CADD and ANNOVAR. 
 
 The next step is to understand how the annotations influence the model by using PCA correlation testing. By doing this, it is possible to cut out unnecessary columns from out dataframe, allowing the classifier to learn using significant data only.
+
+6. **Pearson Correlation Tables and PCA**
+
+In order to understand how our data will influence the model, we look at graphs of the correlation between annotations and we perform a PCA on the variants. The correlation graphs show how much the annotations influence the outcome of the model. PCA groups the variants based on common characteristics, revealing how the different sections of data (coding benign, noncoding benign, coding pathogenic, noncoding pathogenic) look. From this, we may be able to make additional inferences on our data if the regions are found to be grouped separately. 
 
 # References
 
