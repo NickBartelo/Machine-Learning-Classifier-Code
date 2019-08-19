@@ -65,7 +65,25 @@ The next step is to understand how the annotations influence the model by using 
 
 6. **Pearson Correlation Tables and PCA**
 
-In order to understand how our data will influence the model, we look at graphs of the correlation between annotations and we perform a PCA on the variants. The correlation graphs show how much the annotations influence the outcome of the model. PCA groups the variants based on common characteristics, revealing how the different sections of data (coding benign, noncoding benign, coding pathogenic, noncoding pathogenic) look. From this, we may be able to make additional inferences on our data if the regions are found to be grouped separately. 
+In order to understand how our data will influence the model, we look at graphs of the correlation between annotations and we perform a PCA on the variants. The correlation graphs show how much the annotations influence the outcome of the model. We see from our graphs that there are many annotations, in blue, which can be cut out of the model, reducing the dimensionality of the model. PCA groups the variants based on common characteristics, revealing how the different sections of data (coding benign, noncoding benign, coding pathogenic, noncoding pathogenic) look. From this, we may be able to make additional inferences on our data if the regions are found to be grouped separately. Unfortunately for our data, the regions seem to be extremely similar.
+
+* At this point, we will begin the process of manipulating the data to be used in the models and finally run the models. To do so, we must have a lot of computation space and RAM (I used over 200 GB). 
+
+In Jupyter Notebook, open a python terminal and type:
+pip install tornado==4.5.3 
+The default version of tornado was not compatible with certain parts of the model so the older 4.5.3 version was needed. 
+
+In addition, it is necessary to also type the following in the terminal:
+jupyter notebook --NotebookApp.iopub_data_rate_limit=10000000
+This allows more data to be processed by Jupyter Notebook. If the above line is not called, Jupyter Notebook may not allow some of our cells to be called.
+
+Finally, it is necessary to enter the following code into the terminal as well:
+echo 1 > /proc/sys/vm/overcommit_memory
+This allows Python to ignore the usage of higher than normal computation (e.g. 32 GB). 
+
+7. **All Classifiers** 
+
+Every classifier was made
 
 # References
 
