@@ -15,7 +15,7 @@ To follow the correct order of the pipeline, read the files in the following seq
 3. CADD Annotations with CADD Annotations.ipynb
 4. ANNOVAR Annotations with ANNOVAR Annotation.ipynb
 5. Merging Annotations with Merging Annotations.ipynb
-6. PCA for Variants.ipynb
+6. Pearson Correlation Tables and PCA.ipynb
 
 Both the coding file and the Jupyter Notebook file must be looked at in order to achieve the correct results. It is suggested to have both files open side by side to look at which steps correspond with each line in the writing files. 
 
