@@ -19,6 +19,8 @@ To follow the correct order of the pipeline, read the files in the following seq
 
 Both the coding file and the Jupyter Notebook file must be looked at in order to achieve the correct results. It is suggested to have both files open side by side to look at which steps correspond with each line in the writing files. 
 
+#### Although some of the cells give errors, all cells in the notebooks must be called. These will not give errors when run straight through.
+
 ## Mapping Variants to nORFs
 
 1. **Human Derived SNVs**
