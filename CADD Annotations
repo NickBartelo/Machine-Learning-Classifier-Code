@@ -61,4 +61,4 @@ We will discuss this further as how it impacts our model.
 
 Next, we must run the following code to cut out the columns that are unneccessary for our analysis from all CADD annotated dataframes:
 An example for clinvar pathogenic noncoding variants is shown:
-clinvar_pathogenic_noncoding_annotated_with_cadd.drop(columns = ['FeatureID', 'CDSpos', 'PolyPhenVal', 'priPhCons', 'cHmm_E1', 'cHmm_E2', 'cHmm_E3', 'cHmm_E4', 'cHmm_E5', 'cHmm_E6', 'cHmm_E7', 'cHmm_E8', 'cHmm_E9', 'cHmm_E10', 'cHmm_E11', 'cHmm_E12', 'cHmm_E13', 'cHmm_E14', 'cHmm_E15', 'cHmm_E16', 'cHmm_E17', 'cHmm_E18', 'cHmm_E19', 'cHmm_E20', 'cHmm_E21', 'cHmm_E22', 'cHmm_E23', 'cHmm_E24', 'cHmm_E25', 'GerpN', 'GerpS'])
+clinvar_pathogenic_noncoding_annotated_with_cadd.drop(columns = ['FeatureID', 'PolyPhenVal', 'priPhCons', 'cHmm_E1', 'cHmm_E2', 'cHmm_E3', 'cHmm_E4', 'cHmm_E5', 'cHmm_E6', 'cHmm_E7', 'cHmm_E8', 'cHmm_E9', 'cHmm_E10', 'cHmm_E11', 'cHmm_E12', 'cHmm_E13', 'cHmm_E14', 'cHmm_E15', 'cHmm_E16', 'cHmm_E17', 'cHmm_E18', 'cHmm_E19', 'cHmm_E20', 'cHmm_E21', 'cHmm_E22', 'cHmm_E23', 'cHmm_E24', 'cHmm_E25', 'GerpN', 'GerpS'])
