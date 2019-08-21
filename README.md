@@ -16,7 +16,7 @@ To follow the correct order of the pipeline, read the files in the following seq
 4. ANNOVAR Annotations with ANNOVAR Annotation.ipynb
 5. Merging Annotations with Merging Annotations.ipynb
 6. Pearson Correlation Tables and PCA.ipynb
-7. All Classifiers (e.g. Random Forest NonCoding Region Classifier.ipynb)
+7. Random Forest NonCoding Region Classifier.ipynb and Random Forest Coding Region Classifier
 
 Both the coding file and the Jupyter Notebook file must be looked at in order to achieve the correct results. It is suggested to have both files open side by side to look at which steps correspond with each line in the writing files. 
 
@@ -70,7 +70,7 @@ In order to understand how our data will influence the model, we look at graphs 
 
 * At this point, we will begin the process of manipulating the data to be used in the models and finally run the models. To do so, we must have a lot of computation space and RAM (I used over 200 GB). 
 
-7. **All Classifiers** 
+7. **Random Forest NonCoding Region Classifier/Random Forest Coding Region Classifier** 
 
 In Jupyter Notebook, open a python terminal and type:
 pip install tornado==4.5.3 
@@ -83,6 +83,12 @@ This allows more data to be processed by Jupyter Notebook. If the above line is 
 Finally, it is necessary to enter the following code into the terminal as well:
 echo 1 > /proc/sys/vm/overcommit_memory
 This allows Python to ignore the usage of higher than normal computation (e.g. 32 GB).
+
+I recommend looking at the Random Forest NonCoding Region Classifier first because this notebook contains more than the other classifier. There was not enough time to go as in depth with the features for the Coding Region. However, each model gives an output of cross validation run on the testing sets, precision recall curves, and an analysis of the important features for the model. 
+
+8. **Future Work** 
+
+It is important to develop the two models above further and test these models on other data sets to see if the classifiers created have been overfit to the training set (and even the testing set) variants. In addition, we must compare this model to other well known classifiers, such as CADD and FATHMM, to find if our classifier is more efficient than the others. Taking the model one step further, we should next create the classifier using neural networks. This will help us truly understand the genetic mechanisms that drive our classifier. 
 
 # References
 
