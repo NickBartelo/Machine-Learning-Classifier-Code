@@ -85,6 +85,8 @@ Finally, it is necessary to enter the following code into the terminal as well:
 echo 1 > /proc/sys/vm/overcommit_memory
 This allows Python to ignore the usage of higher than normal computation (e.g. 32 GB).
 
+In the interest of not having extremely large outputs be shown on github, which we receive from running some of the code in these notebooks, I cleared the output of some cells before downloading the notebooks to github, making the cells look as if they were not called. This being said, it is still necessary to call these cells. 
+
 I recommend looking at the Random Forest NonCoding Region Classifier first because this notebook contains more than the other classifier. There was not enough time to go as in depth with the features for the Coding Region. However, each model gives an output of cross validation run on the testing sets, precision recall curves, and an analysis of the important features for the model. 
 
 8. **Future Work** 
