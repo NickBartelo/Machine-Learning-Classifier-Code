@@ -57,7 +57,7 @@ For ClinVar VCFs:
 
 The outputs for CADD annotations may contain multiple outputs for a single variant. 
 The reason for this is because CADD uses an Ensemble VEP for annotation and this creates multiple outputs based on predictions of the function of the variant.
-We will discuss this further as how it impacts our model.
+We will discuss this further and how it impacts our model.
 
 Next, we must run the following code to cut out the columns that are unneccessary for our analysis from all CADD annotated dataframes:
 An example for clinvar pathogenic noncoding variants is shown:
