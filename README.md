@@ -17,6 +17,7 @@ To follow the correct order of the pipeline, read the files in the following seq
 5. Merging Annotations with Merging Annotations.ipynb
 6. Pearson Correlation Tables and PCA.ipynb
 7. Random Forest NonCoding Region Classifier.ipynb and Random Forest Coding Region Classifier
+8. Future Work
 
 Both the coding file and the Jupyter Notebook file must be looked at in order to achieve the correct results. It is suggested to have both files open side by side to look at which steps correspond with each line in the writing files. 
 
