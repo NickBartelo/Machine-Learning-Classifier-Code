@@ -1,5 +1,8 @@
 MAKE SURE TO HAVE OVER 100 GB FOR ANNOVAR ANNOTATIONS DISPOSABLE
 
+THE CADD ANNOTATIONS IN THE PYTHON FILES ARE THE SAME AS THOSE FROM THE CADD ANNOTATIONS FILE!!! 
+THE NAMES HAVE BEEN CHANGED FOR WHEN THE CADD FILES ARE CALLED IN, BUT THEY ARE THE SAME ANNOTATED VARIANTS AS IN THE PREVIOUS DOCUMENT!
+
 Files need to have chromosome name (CHROM) column values be in form chr# for ANNOVAR to work.
 
 Again, open the vcf files for annotation in a text editor and delete all header information until reaching the data.
