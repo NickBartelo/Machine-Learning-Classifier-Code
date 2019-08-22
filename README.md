@@ -21,7 +21,7 @@ To follow the correct order of the pipeline, read the files in the following seq
 
 Both the coding file and the Jupyter Notebook file must be looked at in order to achieve the correct results. It is suggested to have both files open side by side to look at which steps correspond with each line in the writing files. 
 
-#### Although some of the cells give errors, all cells in the notebooks must be called. These will not give errors when run straight through.
+#### Although some of the cells show errors, all cells in the notebooks must be called. These will not give errors when run straight through.
 
 ## Mapping Variants to nORFs
 
@@ -60,7 +60,7 @@ The CADD annotations files have different names than in the CADD Annotations.ipy
 
 5. **Merging Annotations**
 
-The Jupyter Notebook file contains all the information necessary for this part of the data manipulation and I would recommend only looking at this file. Merging annotations raises many issues with performance since the files are very large. It is necessary to begin using dask dataframe and considering other things, such as data types (dtypes). The Jupyter Notebook file shows the necessary pipeline to receive final dataframes for the pathogenic coding region, pathogenic noncoding region, benign coding region, and benign noncoding region which will be used for the classifier. 
+The Jupyter Notebook file contains all the information necessary for this part of the data manipulation and I would recommend only looking at this file. Merging annotations raises many issues with performance since the files are very large. It is necessary to begin using dask dataframe and considering other things, such as data types (dtypes). The Jupyter Notebook file shows the necessary pipeline to receive final dataframes for the pathogenic coding region, pathogenic noncoding region, benign coding region, and benign noncoding region which will be used for the classifier. Again, the names of some of the annotations from CADD are called in with different names than from the CADD Annotations.ipynb file. All files are present. For example, when calling in CADD annotated files for the human derived data, the GRCh38-v1.5_anno_0265e2d84faa1b92f64be0ad04982d58_noheader.tsv corresponds to the human_derived_noncoding_for_cadd_1_noheader.csv file. The same reasoning is used for all other CADD annotated files as well.
 
 * At this point, we have dataframes for variants mapped to nORFs which contain annotations from CADD and ANNOVAR. 
 
