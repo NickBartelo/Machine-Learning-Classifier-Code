@@ -2,7 +2,7 @@ Human Derived
 
 In order to run bedtools intersect on this dataframe, we must use the following code:
 
-bedtools intersect -a  ../../../data/input/humanDrive/humanDerived_SNVs_hg38_with_NA.vcf -b  ../../../data/input/sOrfs/nORF_withOut_chr.bed   -wa | sort | uniq -c | awk '{print  $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > human_drive_mapped_to_sorfs.vcf
+bedtools intersect -a  humanderivedSNVsreal_hg38forbedtoolsintersect.vcf -b  noInframe_38.bed   -wa | sort | uniq -c | awk '{print  $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > human_drive_mapped_to_norfs.vcf
 
 where the file after -a is the hg38 vcf file created using the commands from the github file 'Human Derived EPO 6-Way VCF file using liftover for hg19 to hg38',
 -b would be the noInframe_38.bed file which is the nORF file the variants are being mapped to, -wa tells to write the original entry in A for each overlap, 
@@ -11,16 +11,16 @@ awk prints the necessary columns for the output of bedtools intersect
 
 Next we run the following code in which the only difference is the addition of the command -split which only gives the variants mapped to the coding region of the bed file:
 
-bedtools intersect -a  ../../../data/input/humanDrive/humanDerived_SNVs_hg38_with_NA.vcf -b  ../../../data/input/sOrfs/nORF_withOut_chr.bed   -wa -split | sort | uniq -c | awk '{print  $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > human_drive_mapped_to_norfs_with_split.vcf
+bedtools intersect -a  humanderivedSNVsreal_hg38forbedtoolsintersect.vcf -b  noInframe_38.bed   -wa -split | sort | uniq -c | awk '{print  $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > human_drive_mapped_to_norfs_with_split.vcf
 
-Now we want to run a similar code to get information about the variants, seen below, once without -split and once with -split:
+Now we want to run a similar code to get information about the variants (which we will not use ourselves, but can be valuable for other research applciations), seen below, once without -split and once with -split:
 No split:
-bedtools intersect -a  ../../../data/input/humanDrive/humanDerived_SNVs_hg38_with_NA.vcf -b  ../../../data/input/sOrfs/nORF_withOut_chr.bed  -wo | sort | uniq -c | awk '{print  $0}' > human_drive_mapped_to_norfs_with_norfs_ids.txt
+bedtools intersect -a  humanderivedSNVsreal_hg38forbedtoolsintersect.vcf -b  noInframe_38.bed  -wo | sort | uniq -c | awk '{print  $0}' > human_drive_mapped_to_norfs_with_norfs_ids.txt
 
 -wo in this command does the following: Writes the original A and B entries plus the number of base pairs of overlap between the two features. Only A features with overlap are reported.
 
 With split:
-bedtools intersect -a  ../../../data/input/humanDrive/humanDerived_SNVs_hg38_with_NA.vcf -b  ../../../data/input/sOrfs/nORF_withOut_chr.bed  -wo -split | sort | uniq -c | awk '{print  $0}' > human_drive_mapped_to_norfs_with_norfs_ids_with_split.txt
+bedtools intersect -a  humanderivedSNVsreal_hg38forbedtoolsintersect.vcf -b  noInframe_38.bed  -wo -split | sort | uniq -c | awk '{print  $0}' > human_drive_mapped_to_norfs_with_norfs_ids_with_split.txt
 
 ClinVar
 
@@ -30,13 +30,13 @@ Therefore, we must rename the chromosome values in order for them to match with 
 awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' clinvar_20190701.vcf > clinvar_20190701_aligned.vcf
 
 We run bedtools intersect using the following code, which is the same as above with the clinvar vcf as the input:
-bedtools intersect -a  ../../../data/input/clinvar/clinvar_20190211_hg38.vcf -b  ../../../data/input/sOrfs/nORF_withOut_chr.bed  -wa | sort | uniq -c | awk '{print  $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6"\t" $7 "\t" $8 "\t" $9}' > clinvar_mapped_to_norfs.vcf
+bedtools intersect -a  clinvar_20190701_aligned.vcf -b  noInframe_38.bed  -wa | sort | uniq -c | awk '{print  $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6"\t" $7 "\t" $8 "\t" $9}' > clinvar_mapped_to_norfs.vcf
 
-bedtools intersect -a  ../../../data/input/clinvar/clinvar_20190211_hg38.vcf -b  ../../../data/input/sOrfs/nORF_withOut_chr.bed  -wa -split | sort | uniq -c | awk '{print  $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6"\t" $7 "\t" $8 "\t" $9}' > clinvar_mapped_to_norfs_with_split.vcf
+bedtools intersect -a  clinvar_20190701_aligned.vcf -b  noInframe_38.bed  -wa -split | sort | uniq -c | awk '{print  $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6"\t" $7 "\t" $8 "\t" $9}' > clinvar_mapped_to_norfs_with_split.vcf
 
-bedtools intersect -a  ../../../data/input/clinvar/clinvar_20190211_hg38.vcf -b  ../../../data/input/sOrfs/nORF_withOut_chr.bed  -wo | sort | uniq -c | awk '{print  $0}' > clinvar_mapped_to_norfs_with_norfs_ids.txt 
+bedtools intersect -a  clinvar_20190701_aligned.vcf -b  noInframe_38.bed  -wo | sort | uniq -c | awk '{print  $0}' > clinvar_mapped_to_norfs_with_norfs_ids.txt 
 
-bedtools intersect -a  ../../../data/input/clinvar/clinvar_20190211_hg38.vcf -b  ../../../data/input/sOrfs/nORF_withOut_chr.bed  -wo -split | sort | uniq -c | awk '{print  $0}' > clinvar_mapped_to_norfs_with_norfs_ids_with_split.txt 
+bedtools intersect -a  clinvar_20190701_aligned.vcf -b  noInframe_38.bed  -wo -split | sort | uniq -c | awk '{print  $0}' > clinvar_mapped_to_norfs_with_norfs_ids_with_split.txt 
 
 HGMD
 
@@ -44,12 +44,12 @@ The HGMD file for hg38 received by the lab has extra quotes in it. This did not 
 Before using bedtools intersect, we must cut the header off of the file. To do this, open the vcf in a text editor and delete everything up to the data.
 Use the following code, the same as the others, to get an output for bedtools intersect:
 
-bedtools intersect -a  ../../../data/input/hgmd/HGMD_PRO_2016.4_hg38.vcf -b  ../../../data/input/sOrfs/nORF_withOut_chr.bed  -wa | sort | uniq -c | awk '{print  $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6"\t" $7 "\t" $8 "\t" $9}' > hgmd_mapped_to_norfs.vcf
+bedtools intersect -a  hgmd_for_bedtools_intersect.vcf -b  noInframe_38.bed  -wa | sort | uniq -c | awk '{print  $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6"\t" $7 "\t" $8 "\t" $9}' > hgmd_mapped_to_norfs_real.vcf
 
-bedtools intersect -a  ../../../data/input/hgmd/HGMD_PRO_2016.4_hg38.vcf -b  ../../../data/input/sOrfs/nORF_withOut_chr.bed  -wa -split | sort | uniq -c | awk '{print  $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6"\t" $7 "\t" $8 "\t" $9}' > hgmd_mapped_to_norfs_with_split.vcf
+bedtools intersect -a  hgmd_for_bedtools_intersect.vcf -b  noInframe_38.bed  -wa -split | sort | uniq -c | awk '{print  $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6"\t" $7 "\t" $8 "\t" $9}' > hgmd_mapped_to_norfs_real_with_split.vcf
 
-bedtools intersect -a  ../../../data/input/hgmd/HGMD_PRO_2016.4_hg38.vcf -b  ../../../data/input/sOrfs/nORF_withOut_chr.bed  -wo | sort | uniq -c | awk '{print  $0}' > hgmd_mapped_to_norfs_with_norfs_ids.txt
+bedtools intersect -a  hgmd_for_bedtools_intersect.vcf -b  noInframe_38.bed  -wo | sort | uniq -c | awk '{print  $0}' > hgmd_mapped_to_norfs_real_with_norfs_ids.txt
 
-bedtools intersect -a  ../../../data/input/hgmd/HGMD_PRO_2016.4_hg38.vcf -b  ../../../data/input/sOrfs/nORF_withOut_chr.bed  -wo -split | sort | uniq -c | awk '{print  $0}' > hgmd_mapped_to_norfs_with_norfs_ids_with_split.txt
+bedtools intersect -a  hgmd_for_bedtools_intersect.vcf -b  noInframe_38.bed  -wo -split | sort | uniq -c | awk '{print  $0}' > hgmd_mapped_to_norfs_real_with_norfs_ids_with_split.txt
 
 
