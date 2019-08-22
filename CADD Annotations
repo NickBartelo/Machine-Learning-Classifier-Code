@@ -46,7 +46,7 @@ clivnar_benign_coding_annotated_with_cadd = pd.read_table('clinvar_coding_benign
 clivnar_benign_coding_annotated_with_cadd
 This gives a dataframe with the annotated variants.
 
-For annotations of large files not on the CADD website, use the following code:
+For annotations of large files without using the CADD website and using bash instead, use the following code structure (I did not do this myself):
 
 For Human Derived SNVs VCFs:
 ../../../tools/CADD-scripts/CADD.sh -a -g GRCh38 -o human_drive_cadd_output_inclAnno_GRCh38.tsv.gz ../../variantMapToSorfs/humanDrivedSnvCadd/human_drive_mapped_to_norfs.vcf
