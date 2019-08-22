@@ -61,16 +61,32 @@ perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar regsnpintron 
 
 12. Run the following codes in order to annotate the files:
 HGMD
-perl ../../../tools/annovar/convert2annovar.pl -format vcf4 hgmd_mapped_to_sorfs.vcf >hgmd_mapped_to_sorfs.avinput 
-perl ../../../tools/annovar/table_annovar.pl ../../variantMapToSorfs/hgmd/hgmd_mapped_to_sorfs.avinput  ../../../tools/annovar/humandb/ -buildver hg38 -out hgmd  -remove -protocol  refGene,knownGene,ensGene,ljb26_all,dbnsfp31a_interpro,dbnsfp33a,dbscsnv11,intervar_20180118,cosmic70,mcap,revel,regsnpintron  -operation g,g,g,f,f,f,f,f,f,f,f,f -nastring . -csvout -polish --thread 30
+perl ../../../tools/annovar/convert2annovar.pl -format vcf4 hgmd_coding_for_annovar.vcf > hgmd_coding_for_annovar_for_annotation.avinput 
+perl ../../../tools/annovar/table_annovar.pl hgmd_coding_for_annovar_for_annotation.avinput humandb/ -buildver hg38 -out hgmd_coding_annotated -remove -protocol  refGene,knownGene,ensGene,ljb26_all,dbnsfp31a_interpro,dbnsfp33a,dbscsnv11,intervar_20180118,cosmic70,mcap,revel,regsnpintron  -operation g,g,g,f,f,f,f,f,f,f,f,f -nastring . -csvout -polish --thread 30
 
-ClinVar
-perl ../../../tools/annovar/convert2annovar.pl -format vcf4 clinvar_pathogenic_coding_for_annovar.vcf  > clinvar_mapped_to_sorfs.avinput  
-perl ../../../tools/annovar/table_annovar.pl ../../variantMapToSorfs/clinvar/clinvar_mapped_to_sorfs.avinput  ../../../tools/annovar/humandb/ -buildver hg38 -out clinvar  -remove -protocol  refGene,knownGene,ensGene,ljb26_all,dbnsfp31a_interpro,dbnsfp33a,dbscsnv11,intervar_20180118,cosmic70,mcap,revel,regsnpintron  -operation g,g,g,f,f,f,f,f,f,f,f,f -nastring . -csvout -polish --thread 30
+perl ../../../tools/annovar/convert2annovar.pl -format vcf4 hgmd_noncoding_for_annovar.vcf > hgmd_noncoding_for_annovar_for_annotation.avinput 
+perl ../../../tools/annovar/table_annovar.pl hgmd_noncoding_for_annovar_for_annotation.avinput humandb/ -buildver hg38 -out hgmd_noncoding_annotated -remove -protocol  refGene,knownGene,ensGene,ljb26_all,dbnsfp31a_interpro,dbnsfp33a,dbscsnv11,intervar_20180118,cosmic70,mcap,revel,regsnpintron  -operation g,g,g,f,f,f,f,f,f,f,f,f -nastring . -csvout -polish --thread 30
+
+
+ClinVar:
+perl ../../../tools/annovar/convert2annovar.pl -format vcf4 clinvar_pathogenic_coding_for_annovar.vcf  > clinvar_pathogenic_coding_for_annovar_for_annotation.avinput  
+perl ../../../tools/annovar/table_annovar.pl clinvar_pathogenic_coding_for_annovar_for_annotation.avinput humandb/ -buildver hg38 -out clinvar_pathogenic_coding -remove -protocol  refGene,knownGene,ensGene,ljb26_all,dbnsfp31a_interpro,dbnsfp33a,dbscsnv11,intervar_20180118,cosmic70,mcap,revel,regsnpintron  -operation g,g,g,f,f,f,f,f,f,f,f,f -nastring . -csvout -polish --thread 30
+
+perl ../../../tools/annovar/convert2annovar.pl -format vcf4 clinvar_pathogenic_noncoding_for_annovar.vcf  > clinvar_pathogenic_noncoding_for_annovar_for_annotation.avinput  
+perl ../../../tools/annovar/table_annovar.pl clinvar_pathogenic_noncoding_for_annovar_for_annotation.avinput humandb/ -buildver hg38 -out clinvar -remove -protocol  refGene,knownGene,ensGene,ljb26_all,dbnsfp31a_interpro,dbnsfp33a,dbscsnv11,intervar_20180118,cosmic70,mcap,revel,regsnpintron  -operation g,g,g,f,f,f,f,f,f,f,f,f -nastring . -csvout -polish --thread 30
+
+perl ../../../tools/annovar/convert2annovar.pl -format vcf4 clinvar_benign_coding_for_annovar.vcf  > clinvar_benign_coding_for_annovar_for_annotation.avinput  
+perl ../../../tools/annovar/table_annovar.pl clinvar_benign_coding_for_annovar_for_annotation.avinput humandb/ -buildver hg38 -out clinvar_benign_coding -remove -protocol  refGene,knownGene,ensGene,ljb26_all,dbnsfp31a_interpro,dbnsfp33a,dbscsnv11,intervar_20180118,cosmic70,mcap,revel,regsnpintron  -operation g,g,g,f,f,f,f,f,f,f,f,f -nastring . -csvout -polish --thread 30
+
+perl ../../../tools/annovar/convert2annovar.pl -format vcf4 clinvar_benign_noncoding_for_annovar.vcf  > clinvar_benign_noncoding_for_annovar_for_annotation.avinput  
+perl ../../../tools/annovar/table_annovar.pl clinvar_benign_noncoding_for_annovar_for_annotation.avinput humandb/ -buildver hg38 -out clinvar_benign_noncoding -remove -protocol  refGene,knownGene,ensGene,ljb26_all,dbnsfp31a_interpro,dbnsfp33a,dbscsnv11,intervar_20180118,cosmic70,mcap,revel,regsnpintron  -operation g,g,g,f,f,f,f,f,f,f,f,f -nastring . -csvout -polish --thread 30
 
 Human Derived
-perl ../../../tools/annovar/convert2annovar.pl -format vcf4 human_drive_mapped_to_sorfs_annovar_input.vcf > human_drive_mapped_to_sorfs.avinput 
-perl ../../../tools/annovar/table_annovar.pl ../../variantMapToSorfs/humanDrivedSnvCadd/human_drive_mapped_to_sorfs.avinput ../../../tools/annovar/humandb/ -buildver hg38 -out humanDrive  -remove -protocol  refGene,knownGene,ensGene,ljb26_all,dbnsfp31a_interpro,dbnsfp33a,dbscsnv11,intervar_20180118,cosmic70,mcap,revel,regsnpintron  -operation g,g,g,f,f,f,f,f,f,f,f,f -nastring . -csvout -polish --thread 30
+perl ../../../tools/annovar/convert2annovar.pl -format vcf4 human_derived_coding_region_for_annovar.vcf > human_derived_coding_for_annotation.avinput 
+perl ../../../tools/annovar/table_annovar.pl human_derived_coding_for_annotation.avinput humandb/ -buildver hg38 -out human_derived_coding_annotated -remove -protocol  refGene,knownGene,ensGene,ljb26_all,dbnsfp31a_interpro,dbnsfp33a,dbscsnv11,intervar_20180118,cosmic70,mcap,revel,regsnpintron  -operation g,g,g,f,f,f,f,f,f,f,f,f -nastring . -csvout -polish --thread 30
+
+perl ../../../tools/annovar/convert2annovar.pl -format vcf4 human_derived_noncoding_region_for_annovar.vcf > human_derived_noncoding_for_annotation.avinput 
+perl ../../../tools/annovar/table_annovar.pl human_derived_noncoding_for_annotation.avinput humandb/ -buildver hg38 -out human_derived_noncoding_annotated -remove -protocol  refGene,knownGene,ensGene,ljb26_all,dbnsfp31a_interpro,dbnsfp33a,dbscsnv11,intervar_20180118,cosmic70,mcap,revel,regsnpintron  -operation g,g,g,f,f,f,f,f,f,f,f,f -nastring . -csvout -polish --thread 30
 
 Notice the above commands are all the same, just using different file inputs and outputs. 
 A list of what annotations you recieve are found on the first link at the top of this page.
