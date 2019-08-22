@@ -24,6 +24,8 @@ with open(output_VCF, 'w') as vcf:
     vcf.write(header)
 clinvar_benign_coding_for_cadd.to_csv(output_VCF, sep="\t", mode='a', index=False)
 
+Next, open the file in a text editor and cut out all lines with ## in front of them leaving the column names and the data.
+
 To run CADD annotations:
 1. Download the VCF file created above from Jupyter Notebook
 2. Go to the website
