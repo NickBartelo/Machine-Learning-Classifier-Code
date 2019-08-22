@@ -74,6 +74,6 @@ We first must split the single allele column of the bed file into two separate c
 awk '{sub(/\\/," ",$4)};4' <humanderivedSNVsreal_lifted.bed > humanderivedSNVsreal_lifted_with_alleles_separated.bed
 
 Next, we take the necessary columns for the vcf with the code below:
-awk 'NF > 0' humanderivedSNVsreal_lifted_with_alleles_separated.bed | awk '{print $1 "\t" $3 "\t" "." "\t"  $4 "\t" $5}' > humanderivedSNVsreal_lifted_converted_to_vcf.vcf
+awk 'NF > 0' humanderivedSNVsreal_lifted_with_alleles_separated.bed | awk '{print $1 "\t" $3 "\t" "." "\t"  $4 "\t" $5}' > humanderivedSNVsreal_hg38.vcf
 The above gives us the chromosome, position, a blank column for the ID, the REF allele, and the ALT allele. Everything we started with but now in hg38.
 
