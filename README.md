@@ -53,6 +53,7 @@ While reading the CADD Annotation files, there will be a clear guide on how to g
 
 It is necessary to have over 100 GB of space for the ANNOVAR annotations. The ANNOVAR Annotations document shows clearly how to download ANNOVAR from online for academic use and the steps needed to annotate the files correctly.
 I manipulated the dataframes prepared for CADD annotations (with only 5 columns) to be used in ANNOVAR. The Jupyter Notebook file shows the necessary manipulations both before and after the annotations.
+The CADD annotations files have different names than in the CADD Annotations.ipynb file, but are still the same annotated variants.
 
 * At this point, we have dataframes for variants mapped to nORFs which contain annotations from ANNOVAR.
 
