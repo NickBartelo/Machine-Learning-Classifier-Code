@@ -65,7 +65,7 @@ perl ../../../tools/annovar/convert2annovar.pl -format vcf4 hgmd_mapped_to_sorfs
 perl ../../../tools/annovar/table_annovar.pl ../../variantMapToSorfs/hgmd/hgmd_mapped_to_sorfs.avinput  ../../../tools/annovar/humandb/ -buildver hg38 -out hgmd  -remove -protocol  refGene,knownGene,ensGene,ljb26_all,dbnsfp31a_interpro,dbnsfp33a,dbscsnv11,intervar_20180118,cosmic70,mcap,revel,regsnpintron  -operation g,g,g,f,f,f,f,f,f,f,f,f -nastring . -csvout -polish --thread 30
 
 ClinVar
-perl ../../../tools/annovar/convert2annovar.pl -format vcf4 clinvar_mapped_to_sorfs.vcf  >clinvar_mapped_to_sorfs.avinput  
+perl ../../../tools/annovar/convert2annovar.pl -format vcf4 clinvar_pathogenic_coding_for_annovar.vcf  > clinvar_mapped_to_sorfs.avinput  
 perl ../../../tools/annovar/table_annovar.pl ../../variantMapToSorfs/clinvar/clinvar_mapped_to_sorfs.avinput  ../../../tools/annovar/humandb/ -buildver hg38 -out clinvar  -remove -protocol  refGene,knownGene,ensGene,ljb26_all,dbnsfp31a_interpro,dbnsfp33a,dbscsnv11,intervar_20180118,cosmic70,mcap,revel,regsnpintron  -operation g,g,g,f,f,f,f,f,f,f,f,f -nastring . -csvout -polish --thread 30
 
 Human Derived
